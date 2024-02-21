@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "735144361519",
+    "project_id": "luminar-student-app",
+    "storage_bucket": "luminar-student-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735144361519:android:6cf58d564d10fe4a1810da",
+        "android_client_info": {
+          "package_name": "com.luminartechnohub.studentapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxNXfv_F9TCeDIv_r2vBizNO2AbDXfBUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
