@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lumainar/global_widgets/common_image_view.dart';
 import 'package:lumainar/global_widgets/empty_screen_widget.dart';
 import 'package:lumainar/global_widgets/reusable_loading_widget.dart';
+import 'package:lumainar/presentation/i_frame_video_screen/i_frame_video_screen.dart';
 import 'package:lumainar/presentation/video_player_Screen/view/video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -56,7 +57,7 @@ class _BatchClassVideoScreenState extends State<BatchClassVideoScreen> {
                           return InkWell(
                             onTap: () {
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => VideoPlayerScreen(videoId: videoId)));
+                                  MaterialPageRoute(builder: (context) => IFrameVideoPlayerScreen(videoId: videoId)));
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(vertical: 10),
