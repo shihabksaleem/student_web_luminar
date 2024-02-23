@@ -64,6 +64,7 @@ dependencies:
   sharedpreference_utils: ^1.0.0
   shimmer: ^3.0.0
   url_launcher: ^6.2.4
+  web: ^0.4.2
   youtube_player_flutter: ^8.1.2
   youtube_player_iframe: ^4.0.4
 
