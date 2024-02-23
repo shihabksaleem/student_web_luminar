@@ -21,11 +21,7 @@ Future<void> main() async {
   );
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]).then((value) {
-    runApp(const MyApp());
-  });
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -50,8 +46,6 @@ class MyApp extends StatelessWidget {
             ThemeData(scaffoldBackgroundColor: Colors.white, iconTheme: IconThemeData(color: ColorConstant.primary1)),
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
-          maxWidth: 1200,
-          minWidth: 480,
           defaultScale: true,
           breakpoints: [
             ResponsiveBreakpoint.resize(480, name: MOBILE),

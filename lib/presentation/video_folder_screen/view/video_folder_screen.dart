@@ -82,9 +82,7 @@ class _VideoFolderScreenState extends State<VideoFolderScreen> {
                   : GridView.builder(
                       padding: EdgeInsets.only(top: 30),
                       itemCount: folderVideoListData.folderVideoList.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                      ),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, mainAxisExtent: 200),
                       itemBuilder: (context, index) => InkWell(
                         onTap: () {
                           Navigator.of(context).push(
@@ -99,13 +97,12 @@ class _VideoFolderScreenState extends State<VideoFolderScreen> {
                           child: Column(
                             children: [
                               Container(
+                                height: 150,
                                 padding: EdgeInsets.all(10),
-                                height: 76,
-                                width: 146,
                                 child: Center(
                                   child: Image.asset(
                                     ImageConstants.videoFolderImge,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),

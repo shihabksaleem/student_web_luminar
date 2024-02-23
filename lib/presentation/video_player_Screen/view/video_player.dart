@@ -110,65 +110,54 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (MediaQuery.of(context).orientation == Orientation.landscape) {
-          SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-        }
-        return true;
-      },
-      child: Scaffold(
-        extendBody: true,
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              if (MediaQuery.of(context).orientation == Orientation.landscape) {
-                SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-              }
-              Navigator.of(context).pop();
-            },
+    return Scaffold(
+      extendBody: true,
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-        body: (widget.videoId.isNotEmpty)
-            ? YoutubePlayerBuilder(
-                player: YoutubePlayer(
-                  controller: _ytController,
-                  showVideoProgressIndicator: true,
-                  progressIndicatorColor: Colors.lightGreen,
-                  bottomActions: [
-                    CurrentPosition(),
-                    ProgressBar(isExpanded: true),
-                    FullScreenButton(),
-                  ],
-                  onReady: () {},
-                  onEnded: (YoutubeMetaData _md) {
-                    _ytController.seekTo(const Duration(seconds: 0));
-                  },
-                ),
-                builder: (context, player) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // some widgets
-                        player,
-                        // some other widgets
-                      ],
-                    ),
-                  );
-                },
-              )
-            : Center(
-                child: Text("No Videos"),
-              ),
       ),
+      body: (widget.videoId.isNotEmpty)
+          ? YoutubePlayerBuilder(
+              player: YoutubePlayer(
+                controller: _ytController,
+                showVideoProgressIndicator: true,
+                progressIndicatorColor: Colors.lightGreen,
+                bottomActions: [
+                  CurrentPosition(),
+                  ProgressBar(isExpanded: true),
+                  FullScreenButton(),
+                ],
+                onReady: () {},
+                onEnded: (YoutubeMetaData _md) {
+                  _ytController.seekTo(const Duration(seconds: 0));
+                },
+              ),
+              builder: (context, player) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // some widgets
+                      player,
+                      // some other widgets
+                    ],
+                  ),
+                );
+              },
+            )
+          : const Center(
+              child: Text("No Videos"),
+            ),
     );
   }
 }
