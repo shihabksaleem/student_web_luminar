@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lumainar/global_widgets/empty_screen_widget.dart';
 import 'package:lumainar/global_widgets/reusable_loading_widget.dart';
 import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
+import 'package:lumainar/repository/helper/helper_fincitons.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../global_widgets/SearchBar.dart';
@@ -37,6 +38,8 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
+      
+     
       ),
       body: batchscreenprovider.isBatchsscreenLoading
           ? const Center(
@@ -70,9 +73,24 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
                                           : "${batchscreenprovider.batchList.length}  Batches",
                                       style: const TextStyle(fontSize: 16),
                                     ),
-                                    const Text(
-                                      "Recently Added",
-                                      style: TextStyle(fontSize: 16),
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          "Recently Added",
+                                          style: TextStyle(fontSize: 16),
+                               
+                                        ),  SizedBox(width: 30),InkWell(
+                                          onTap: (){
+                                            HelperFunctions.logOut(context);
+                                          },
+                                          child: Container(
+                                                        height: 40,
+                                                      padding: EdgeInsets.symmetric(horizontal: 25,),
+                                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: ColorConstant.primary1, ),
+                                                               
+                                                      child: Center(child: Text("LogOut",style: TextStyle(color: Colors.white),),),),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

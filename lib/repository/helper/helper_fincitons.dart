@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumainar/presentation/mobile/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
 import 'package:lumainar/presentation/mobile/login_page_screen/view/logIn_page.dart';
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
@@ -11,11 +12,15 @@ class HelperFunctions {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sp.clear();
       Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(),
-          ),
-          (route) => false);
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>  LayoutBuilder(builder: (context, constraints) {
+
+                      return      constraints.maxWidth<1000?LoginPage():DesktopLoginPage();
+                          },),
+                        ),
+                        (route) => false,
+                      );
     });
   }
 

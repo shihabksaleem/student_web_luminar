@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumainar/presentation/mobile/video_folder_screen/view/video_folder_screen.dart';
 import '../../../../core/constants/colors.dart';
-
 import 'widgets/batch_screen_container.dart';
 
 class BatchDetails extends StatefulWidget {
@@ -30,6 +29,7 @@ class _BatchDetailsState extends State<BatchDetails> {
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(color: ColorConstant.primary1),
+        
       ),
       body: SafeArea(
           child: SingleChildScrollView(
