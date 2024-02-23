@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lumainar/core/app_utils/app_utils.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/view/batch_bottom_tab.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_tab.dart';
 import 'package:lumainar/repository/api/personal_details_screen/model/student_personal_details_res_model.dart';
 import 'package:lumainar/repository/api/personal_details_screen/service/personal_details_screen_service.dart';
 import 'package:lumainar/repository/api/splash_screen/model/mobile_app_res_model.dart';

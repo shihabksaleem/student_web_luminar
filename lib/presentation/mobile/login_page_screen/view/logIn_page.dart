@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:lumainar/core/app_utils/app_utils.dart';
 import 'package:lumainar/core/constants/colors.dart';
 import 'package:lumainar/global_widgets/reusable_loading_widget.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/view/batch_bottom_tab.dart';
-import 'package:lumainar/presentation/login_page_screen/controller/login_screen_controller.dart';
-import 'package:lumainar/presentation/otp_verification_screen/view/otp_verification_screen.dart';
-import 'package:lumainar/presentation/splash_screen/controller/app_config_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_tab.dart';
+import 'package:lumainar/presentation/mobile/login_page_screen/controller/login_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen.dart';
+import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
 
-import '../../../global_widgets/textField.dart';
+import '../../../../global_widgets/textField.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

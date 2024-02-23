@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lumainar/core/constants/colors.dart';
 import 'package:lumainar/core/constants/image_constants.dart';
 import 'package:lumainar/global_widgets/reusable_loading_widget.dart';
-import 'package:lumainar/presentation/batch_class_videos_screen/view/batch_class_videos_screen.dart';
-import 'package:lumainar/presentation/video_folder_screen/controller/video_folder_controller.dart';
-import 'package:lumainar/presentation/video_folder_screen/view/widgets/custom_folder.dart';
+import 'package:lumainar/presentation/mobile/batch_class_videos_screen/view/batch_class_videos_screen.dart';
+import 'package:lumainar/presentation/mobile/video_folder_screen/controller/video_folder_controller.dart';
+import 'package:lumainar/presentation/mobile/video_folder_screen/view/widgets/custom_folder.dart';
 import 'package:provider/provider.dart';
 
 class VideoFolderScreen extends StatefulWidget {

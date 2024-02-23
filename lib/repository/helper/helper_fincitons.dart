@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lumainar/presentation/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
-import 'package:lumainar/presentation/login_page_screen/view/logIn_page.dart';
-import 'package:lumainar/presentation/splash_screen/controller/app_config_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/login_page_screen/view/logIn_page.dart';
+import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

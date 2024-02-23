@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lumainar/core/constants/colors.dart';
 import 'package:lumainar/firebase_options.dart';
-import 'package:lumainar/presentation/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
-import 'package:lumainar/presentation/otp_verification_screen/controller/otp_verification_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
+import 'package:lumainar/presentation/mobile/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/otp_verification_screen/controller/otp_verification_screen_controller.dart';
 
-import 'package:lumainar/presentation/splash_screen/controller/app_config_controller.dart';
-import 'package:lumainar/presentation/splash_screen/view/splashScreen.dart';
-import 'package:lumainar/presentation/video_folder_screen/controller/video_folder_controller.dart';
+import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
+import 'package:lumainar/presentation/mobile/splash_screen/view/splashScreen.dart';
+import 'package:lumainar/presentation/mobile/video_folder_screen/controller/video_folder_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'presentation/login_page_screen/controller/login_screen_controller.dart';
-import 'presentation/video_player_Screen/controller/video_player_screen_controller.dart';
+import 'presentation/mobile/login_page_screen/controller/login_screen_controller.dart';
+import 'presentation/mobile/video_player_Screen/controller/video_player_screen_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
         ),
-        home: const SplashScreen(),
+        home: SplashScreen(),
         // routes: {
         //   '/BottomNavBar': (context) => const BottomNavBar(),
         // },

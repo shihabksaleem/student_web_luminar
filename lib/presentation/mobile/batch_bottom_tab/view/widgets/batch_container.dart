@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lumainar/core/constants/colors.dart';
 import 'package:lumainar/global_widgets/reusable_loading_widget.dart';
-import 'package:lumainar/presentation/batch_details_screen/view/batch_details.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_details_screen/view/batch_details.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
 import 'package:provider/provider.dart';
 
 class BatchContainer extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lumainar/app_config/app_config.dart';
 import 'package:lumainar/core/app_utils/app_utils.dart';
-import 'package:lumainar/presentation/splash_screen/controller/app_config_controller.dart';
+import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:lumainar/repository/helper/api_response.dart';
 
 class ApiHelper {

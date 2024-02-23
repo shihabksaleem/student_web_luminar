@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lumainar/presentation/video_folder_screen/view/video_folder_screen.dart';
-import '../../../core/constants/colors.dart';
+import 'package:lumainar/presentation/mobile/video_folder_screen/view/video_folder_screen.dart';
+import '../../../../core/constants/colors.dart';
 
 import 'widgets/batch_screen_container.dart';
 

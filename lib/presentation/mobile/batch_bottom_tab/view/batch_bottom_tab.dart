@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lumainar/global_widgets/empty_screen_widget.dart';
 import 'package:lumainar/global_widgets/reusable_loading_widget.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
 import 'package:provider/provider.dart';
-import '../../../core/constants/colors.dart';
-import '../../../global_widgets/SearchBar.dart';
+import '../../../../core/constants/colors.dart';
+import '../../../../global_widgets/SearchBar.dart';
 import 'widgets/batch_container.dart';
 
 class BatchBottomTab extends StatefulWidget {

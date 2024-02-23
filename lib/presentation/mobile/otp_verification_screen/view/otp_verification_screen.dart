@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lumainar/core/app_utils/app_utils.dart';
 import 'package:lumainar/global_widgets/reusable_loading_widget.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/view/batch_bottom_tab.dart';
-import 'package:lumainar/presentation/otp_verification_screen/controller/otp_verification_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_tab.dart';
+import 'package:lumainar/presentation/mobile/otp_verification_screen/controller/otp_verification_screen_controller.dart';
 
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import '../../../core/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({Key? key, this.isNavigationFromLogin = false, required this.phoneNumber})

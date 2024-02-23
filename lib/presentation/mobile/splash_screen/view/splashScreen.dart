@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:lumainar/core/app_utils/app_utils.dart';
 import 'package:lumainar/core/constants/image_constants.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
-import 'package:lumainar/presentation/batch_bottom_tab/view/batch_bottom_tab.dart';
-import 'package:lumainar/presentation/splash_screen/controller/app_config_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_bottom_tab_controller.dart';
+import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_tab.dart';
+import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
+import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../login_page_screen/view/logIn_page.dart';
@@ -130,7 +131,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
+                          builder: (context) =>  LayoutBuilder(builder: (context, constraints) {
+
+                      return      constraints.maxWidth<1000?LoginPage():DesktopLoginPage();
+                          },),
                         ),
                         (route) => false,
                       );
