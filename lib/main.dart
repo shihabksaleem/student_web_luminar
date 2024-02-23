@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:lumainar/core/constants/colors.dart';
 import 'package:lumainar/firebase_options.dart';
-import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
+
 import 'package:lumainar/presentation/mobile/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/controller/otp_verification_screen_controller.dart';
 

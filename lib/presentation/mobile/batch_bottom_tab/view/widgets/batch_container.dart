@@ -25,121 +25,246 @@ class _BatchContainerState extends State<BatchContainer> {
   @override
   Widget build(BuildContext context) {
     final batchscreenprovider = Provider.of<BatchScreenController>(context);
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: batchscreenprovider.batchList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => BatchDetails(
-                  batchname:
-                      batchscreenprovider.batchList[index].batchName ?? "",
-                  batchId: batchscreenprovider.batchList[index].id.toString(),
-                ),
-              ));
-            },
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        offset: const Offset(0, 8),
-                        color: ColorConstant.lightGrey.withOpacity(.20),
-                        blurRadius: 6,
+    return LayoutBuilder(builder: (context, constraints) {
+      return constraints.maxWidth < 1000
+          ? ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: batchscreenprovider.batchList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => BatchDetails(
+                        batchname:
+                            batchscreenprovider.batchList[index].batchName ??
+                                "",
+                        batchId:
+                            batchscreenprovider.batchList[index].id.toString(),
+                      ),
+                    ));
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              offset: const Offset(0, 8),
+                              color: ColorConstant.lightGrey.withOpacity(.20),
+                              blurRadius: 6,
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xffEDE9EE),
+                        ),
+                        height: 120,
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const SizedBox(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.dvr,
+                                    color: ColorConstant.primary1,
+                                    size: 30,
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const SizedBox(),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            batchscreenprovider.batchList[index]
+                                                    .batchName ??
+                                                '',
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            batchscreenprovider.batchList[index]
+                                                    .startdate ??
+                                                "",
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox()
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Luminar Tecnolab",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Text(
+                                    batchscreenprovider
+                                                .batchList[index].course ==
+                                            true
+                                        ? "Online"
+                                        : "Offline",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: batchscreenprovider
+                                                    .batchList[index].course ==
+                                                false
+                                            ? Colors.red
+                                            : Colors.green),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox()
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       )
                     ],
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color(0xffEDE9EE),
                   ),
-                  height: 120,
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const SizedBox(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.dvr,
-                              color: ColorConstant.primary1,
-                              size: 30,
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const SizedBox(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      batchscreenprovider
-                                              .batchList[index].batchName ??
-                                          '',
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      batchscreenprovider
-                                              .batchList[index].startdate ??
-                                          "",
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox()
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
+                );
+              })
+          : GridView.builder(
+              padding: EdgeInsets.all(10),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: batchscreenprovider.batchList.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemBuilder: (context, index) => Container(
+                child: Column(
+                  children: [
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 8),
+                            color: ColorConstant.lightGrey.withOpacity(.20),
+                            blurRadius: 6,
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0xffEDE9EE),
+                      ),
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              "Luminar Tecnolab",
-                              style: TextStyle(
-                                fontSize: 15,
-                              ),
+                            const SizedBox(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.dvr,
+                                  color: ColorConstant.primary1,
+                                  size: 30,
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const SizedBox(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          batchscreenprovider
+                                                  .batchList[index].batchName ??
+                                              '',
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          batchscreenprovider
+                                                  .batchList[index].startdate ??
+                                              "",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox()
+                                  ],
+                                ),
+                              ],
                             ),
-                            Text(
-                              batchscreenprovider.batchList[index].course ==
-                                      true
-                                  ? "Online"
-                                  : "Offline",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: batchscreenprovider
-                                              .batchList[index].course ==
-                                          false
-                                      ? Colors.red
-                                      : Colors.green),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Luminar Tecnolab",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  batchscreenprovider.batchList[index].course ==
+                                          true
+                                      ? "Online"
+                                      : "Offline",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: batchscreenprovider
+                                                  .batchList[index].course ==
+                                              false
+                                          ? Colors.red
+                                          : Colors.green),
+                                ),
+                              ],
                             ),
+                            const SizedBox()
                           ],
                         ),
-                        const SizedBox()
-                      ],
+                      ),
                     ),
-                  ),
+                    const SizedBox(
+                      height: 20,
+                    )
+                  ],
                 ),
-                const SizedBox(
-                  height: 20,
-                )
-              ],
-            ),
-          );
-        });
+              ),
+            );
+    });
   }
 }
