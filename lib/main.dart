@@ -5,6 +5,8 @@ import 'package:lumainar/core/constants/colors.dart';
 import 'package:lumainar/firebase_options.dart';
 
 import 'package:lumainar/presentation/mobile/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
+import 'package:lumainar/presentation/mobile/login_page_screen/view/logIn_page.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/controller/otp_verification_screen_controller.dart';
 
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
@@ -54,10 +56,11 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
         ),
-        home: SplashScreen(),
-        // routes: {
-        //   '/BottomNavBar': (context) => const BottomNavBar(),
-        // },
+        home: LayoutBuilder(
+          builder: (context, constraints) {
+            return constraints.maxWidth < 1000 ? LoginPage() : DesktopLoginPage();
+          },
+        ),
       ),
     );
   }

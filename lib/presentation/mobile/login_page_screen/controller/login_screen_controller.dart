@@ -73,4 +73,9 @@ class LoginScreenController extends ChangeNotifier {
     isPasswordVisible = !isPasswordVisible;
     notifyListeners();
   }
+
+  void setLoading(bool loadingState) {
+    isLoading = loadingState;
+    notifyListeners();
+  }
 }
