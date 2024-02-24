@@ -24,18 +24,17 @@ class EmptyScreenWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Lottie.asset(
-                      width: MediaQuery.of(context).size.width * .75,
-                      'assets/animations/emptyscreen.json',
+                      width: MediaQuery.of(context).size.height * .5,
+                      'assets/animations/not data.json',
                       reverse: true,
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      text,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    )
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    // Text(
+                    //   text,
+                    //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    // )
                   ],
                 ),
               )),
