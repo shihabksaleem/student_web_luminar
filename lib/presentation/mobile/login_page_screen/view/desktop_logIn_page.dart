@@ -29,15 +29,18 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
     super.initState();
 
     if (mounted) {
-      Provider.of<LoginScreenController>(context, listen: false).setLoading(true);
+      Provider.of<LoginScreenController>(context, listen: false)
+          .setLoading(true);
 
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
         await AppUtils.getAccessKey().then((value) async {
           if (value != null && value.isNotEmpty) {
-            Provider.of<AppConfigController>(context, listen: false).haveAccessKey();
+            Provider.of<AppConfigController>(context, listen: false)
+                .haveAccessKey();
           }
         });
-        Provider.of<LoginScreenController>(context, listen: false).setLoading(false);
+        Provider.of<LoginScreenController>(context, listen: false)
+            .setLoading(false);
       });
     }
   }
@@ -161,103 +164,160 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                 Expanded(
                     flex: 2,
                     child: Container(
-                      padding: EdgeInsets.all(60),
                       //  color: Colors.green,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: 150, width: 150, child: Image.asset("assets/images/dp/luminar logo.png")),
-                            SizedBox(
-                              height: 30,
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 230, 230, 230),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              bottomLeft: Radius.circular(20),
                             ),
-                            const Text(
-                              'Hey There LogIn Now !',
-                              style: TextStyle(fontSize: 25),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            TextfieldRefactor(
-                              keyboardType: TextInputType.phone,
-                              controller: _userNameController,
-                              labelText: "Phone number",
-                            ),
-                            const SizedBox(height: 30),
-                            TextfieldRefactor(
-                              obscureText: loginProvider.isPasswordVisible == false ? true : false,
-                              // TODO :need to add form keys in text fielsds
-                              controller: _passwordController,
-                              labelText: "Password",
-                              suffixIcon: IconButton(
-                                onPressed: Provider.of<LoginScreenController>(context, listen: false).eyButton,
-                                icon: Icon(
-                                  loginProvider.isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                                  color: ColorConstant.primary1,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                    height: 150,
+                                    width: 150,
+                                    child: Image.asset(
+                                        "assets/images/dp/luminar logo.png")),
+                                SizedBox(
+                                  height: 30,
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Provider.of<LoginScreenController>(context).isLoading
-                                ? Center(child: ReusableLoadingWidget())
-                                : InkWell(
-                                    onTap: () async {
-                                      if (_userNameController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
-                                        await Provider.of<LoginScreenController>(context, listen: false)
-                                            .onLogin(
-                                                phoneNumber: _userNameController.text.trim(),
-                                                password: _passwordController.text.trim())
-                                            .then((value) async {
-                                          if (value) {
-                                            if (loginProvider.isMobileVerified == true) {
-                                              Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => ChangeNotifierProvider(
-                                                          create: (context) => BatchScreenController(),
-                                                          child: BatchBottomTab())),
-                                                  (route) => false);
-                                            } else {
-                                              Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => OtpVerificationScreen(
-                                                        isNavigationFromLogin: true,
-                                                        phoneNumber: loginProvider.userPhoneNumber ?? ""),
-                                                  ),
-                                                  (route) => false);
-                                            }
-                                            _userNameController.clear();
-                                            _passwordController.clear();
-                                          }
-                                          // else {
-                                          //   AppUtils.oneTimeSnackBar("Login failed Try Again", context: context);
-                                          // }
-                                        });
-                                      } else {
-                                        AppUtils.oneTimeSnackBar(
-                                            bgColor: Colors.red, "Enter valid user name or password", context: context);
-                                      }
-                                    },
-                                    child: Container(
-                                      height: 55,
-                                      width: MediaQuery.of(context).size.width * .75,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: ColorConstant.primary1,
-                                      ),
-                                      child: const Center(
-                                          child: Text(
-                                        "LogIn",
-                                        style:
-                                            TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w600),
-                                      )),
+                                const Text(
+                                  'Hey There LogIn Now !',
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextfieldRefactor(
+                                  keyboardType: TextInputType.phone,
+                                  controller: _userNameController,
+                                  labelText: "Phone number",
+                                ),
+                                const SizedBox(height: 30),
+                                TextfieldRefactor(
+                                  obscureText:
+                                      loginProvider.isPasswordVisible == false
+                                          ? true
+                                          : false,
+                                  // TODO :need to add form keys in text fielsds
+                                  controller: _passwordController,
+                                  labelText: "Password",
+                                  suffixIcon: IconButton(
+                                    onPressed:
+                                        Provider.of<LoginScreenController>(
+                                                context,
+                                                listen: false)
+                                            .eyButton,
+                                    icon: Icon(
+                                      loginProvider.isPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: ColorConstant.primary1,
                                     ),
                                   ),
-                          ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Provider.of<LoginScreenController>(context)
+                                        .isLoading
+                                    ? Center(child: ReusableLoadingWidget())
+                                    : InkWell(
+                                        onTap: () async {
+                                          if (_userNameController
+                                                  .text.isNotEmpty &&
+                                              _passwordController
+                                                  .text.isNotEmpty) {
+                                            await Provider.of<
+                                                        LoginScreenController>(
+                                                    context,
+                                                    listen: false)
+                                                .onLogin(
+                                                    phoneNumber:
+                                                        _userNameController.text
+                                                            .trim(),
+                                                    password:
+                                                        _passwordController.text
+                                                            .trim())
+                                                .then((value) async {
+                                              if (value) {
+                                                if (loginProvider
+                                                        .isMobileVerified ==
+                                                    true) {
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ChangeNotifierProvider(
+                                                                  create: (context) =>
+                                                                      BatchScreenController(),
+                                                                  child:
+                                                                      BatchBottomTab())),
+                                                      (route) => false);
+                                                } else {
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            OtpVerificationScreen(
+                                                                isNavigationFromLogin:
+                                                                    true,
+                                                                phoneNumber:
+                                                                    loginProvider
+                                                                            .userPhoneNumber ??
+                                                                        ""),
+                                                      ),
+                                                      (route) => false);
+                                                }
+                                                _userNameController.clear();
+                                                _passwordController.clear();
+                                              }
+                                              // else {
+                                              //   AppUtils.oneTimeSnackBar("Login failed Try Again", context: context);
+                                              // }
+                                            });
+                                          } else {
+                                            AppUtils.oneTimeSnackBar(
+                                                bgColor: Colors.red,
+                                                "Enter valid user name or password",
+                                                context: context);
+                                          }
+                                        },
+                                        child: Container(
+                                          height: 55,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .75,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: ColorConstant.primary1,
+                                          ),
+                                          child: const Center(
+                                              child: Text(
+                                            "LogIn",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600),
+                                          )),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ))
