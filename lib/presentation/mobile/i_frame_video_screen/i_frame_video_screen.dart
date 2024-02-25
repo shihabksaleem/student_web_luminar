@@ -13,11 +13,6 @@ class IFrameVideoPlayerScreen extends StatefulWidget {
 class _IFrameVideoPlayerScreenState extends State<IFrameVideoPlayerScreen> {
   bool fullScreen = false;
 
-  // List<YoutubePlayerController> lYTC = [];
-  // Map<String, dynamic> cStates = {};
-  // late YoutubePlayerController _ytController;
-
-  // If the requirement is just to play a single video.
   var _controller;
 
   @override
