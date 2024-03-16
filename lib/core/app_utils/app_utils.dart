@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:lumainar/core/constants/colors.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,9 +56,7 @@ class AppUtils {
 
   static bool validationOfEmail(String emailPassed) {
     var email = emailPassed;
-    bool emailValid = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email);
+    bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
     return emailValid;
   }
 
@@ -103,8 +101,7 @@ class AppUtils {
   static Future<String?> getAccessKey() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
-      final access = jsonDecode(
-          sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['access'];
+      final access = jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['access'];
       return access;
     } else {
       return null;
@@ -115,8 +112,7 @@ class AppUtils {
   static Future<String?> getGuestDetails() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString(AppConfig.GUEST_PHONENUMBER) != null) {
-      final guestDetails =
-          sharedPreferences.getString(AppConfig.GUEST_PHONENUMBER);
+      final guestDetails = sharedPreferences.getString(AppConfig.GUEST_PHONENUMBER);
       return guestDetails;
     } else {
       return null;
@@ -127,9 +123,7 @@ class AppUtils {
   static Future<String?> getUserId() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
-      final userId = jsonDecode(
-              sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['userId']
-          .toString();
+      final userId = jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['userId'].toString();
       return userId;
     } else {
       return null;
@@ -140,10 +134,7 @@ class AppUtils {
   static Future<String?> getStudentId() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
-      final studentId =
-          jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)[
-                  'studentId']
-              .toString();
+      final studentId = jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['studentId'].toString();
       return studentId;
     } else {
       return null;
@@ -153,8 +144,7 @@ class AppUtils {
   static Future<String?> getStudentPhoneNumber() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.STUDENT_PHONE_NUMBER) != null) {
-      final studentPhoneNumber =
-          sharedPreferences.get(AppConfig.STUDENT_PHONE_NUMBER) as String;
+      final studentPhoneNumber = sharedPreferences.get(AppConfig.STUDENT_PHONE_NUMBER) as String;
       return studentPhoneNumber;
     } else {
       return null;
@@ -165,9 +155,7 @@ class AppUtils {
   static Future<String?> getPhoneVerificaitonStatus() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
-      final isVerified =
-          jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)[
-              'Phone_verified'];
+      final isVerified = jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['Phone_verified'];
       return isVerified;
     } else {
       return null;
@@ -200,10 +188,7 @@ class AppUtils {
         content: Text(message!, style: textStyle),
         duration: Duration(seconds: time),
         margin: showOnTop
-            ? EdgeInsets.only(
-                bottom: MediaQuery.of(context ?? context).size.height - 100,
-                right: 20,
-                left: 20)
+            ? EdgeInsets.only(bottom: MediaQuery.of(context ?? context).size.height - 100, right: 20, left: 20)
             : null,
       ),
     );
@@ -214,32 +199,32 @@ class AppUtils {
 
   // update
 
-  static Future<bool> haveUpdate({required String newVersion}) async {
-    try {
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  // static Future<bool> haveUpdate({required String newVersion}) async {
+  //   try {
+  //     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-      String currentVersion = packageInfo.version;
-      String buildNumber = packageInfo.buildNumber;
-      AppUtils().printData("$currentVersion+$buildNumber",
-          info: "full version version");
-      AppUtils().printData(buildNumber, info: "buildNumber");
+  //     String currentVersion = packageInfo.version;
+  //     String buildNumber = packageInfo.buildNumber;
+  //     AppUtils().printData("$currentVersion+$buildNumber",
+  //         info: "full version version");
+  //     AppUtils().printData(buildNumber, info: "buildNumber");
 
-      // Parse versions using Version.parse function
-      final Version current = Version.parse("$currentVersion+$buildNumber");
-      final Version latest = Version.parse(newVersion);
+  //     // Parse versions using Version.parse function
+  //     final Version current = Version.parse("$currentVersion+$buildNumber");
+  //     final Version latest = Version.parse(newVersion);
 
-      // Compare versions
-      final comparisonResult = current.compareTo(latest);
-      print(comparisonResult);
+  //     // Compare versions
+  //     final comparisonResult = current.compareTo(latest);
+  //     print(comparisonResult);
 
-      // Check if current version is lower than the latest version
-      if (comparisonResult < 0) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      return false;
-    }
-  }
+  //     // Check if current version is lower than the latest version
+  //     if (comparisonResult < 0) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // }
 }
