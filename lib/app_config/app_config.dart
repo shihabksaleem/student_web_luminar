@@ -1,7 +1,7 @@
 class AppConfig {
   //dev urls
-  static String devUrl = 'https://studyappmw.dev.luminartechnohub.com/api/v1';
-  static String mediadevUrl = 'https://studyappmw.dev.luminartechnohub.com';
+  static String devUrl = 'https://studyappmw.luminartechnohub.com/api/v1';
+  // static String mediadevUrl = 'https://studyappmw.dev.luminartechnohub.com';
 
   // produciton urls
 
@@ -9,7 +9,7 @@ class AppConfig {
 
 // Final urls
   static String baseUrl = devUrl;
-  static String mediaBaseUrl = mediadevUrl;
+  // static String mediaBaseUrl = mediadevUrl;
 
   /// Shared pref Keys
   static const String ACCESS = 'access';
