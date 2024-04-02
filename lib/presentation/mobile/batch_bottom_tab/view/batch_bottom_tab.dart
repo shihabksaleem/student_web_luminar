@@ -19,7 +19,8 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await Provider.of<BatchScreenController>(context, listen: false).getBatchList();
+      await Provider.of<BatchScreenController>(context, listen: false)
+          .getBatchList();
     });
     super.initState();
   }
@@ -33,13 +34,38 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
         title: Center(
           child: Text(
             "Batches",
-            style: TextStyle(color: ColorConstant.primary1, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: ColorConstant.primary1, fontWeight: FontWeight.bold),
           ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-      
-     
+        actions: [
+          InkWell(
+            onTap: () {
+              HelperFunctions.logOut(context);
+            },
+            child: Container(
+              height: 40,
+              padding: EdgeInsets.symmetric(
+                horizontal: 25,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: ColorConstant.primary1,
+              ),
+              child: Center(
+                child: Text(
+                  "LogOut",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 60,
+          )
+        ],
       ),
       body: batchscreenprovider.isBatchsscreenLoading
           ? const Center(
@@ -51,7 +77,9 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
                   : RefreshIndicator(
                       color: ColorConstant.primary1,
                       onRefresh: () async {
-                        await Provider.of<BatchScreenController>(context, listen: false).getBatchList();
+                        await Provider.of<BatchScreenController>(context,
+                                listen: false)
+                            .getBatchList();
                       },
                       child: Container(
                         height: double.infinity,
@@ -65,7 +93,8 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
                                 // const SearchBarContainer(),
                                 const SizedBox(height: 30),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       batchscreenprovider.batchList.length <= 1
@@ -78,17 +107,30 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
                                         const Text(
                                           "Recently Added",
                                           style: TextStyle(fontSize: 16),
-                               
-                                        ),  SizedBox(width: 30),InkWell(
-                                          onTap: (){
+                                        ),
+                                        SizedBox(width: 30),
+                                        InkWell(
+                                          onTap: () {
                                             HelperFunctions.logOut(context);
                                           },
                                           child: Container(
-                                                        height: 40,
-                                                      padding: EdgeInsets.symmetric(horizontal: 25,),
-                                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: ColorConstant.primary1, ),
-                                                               
-                                                      child: Center(child: Text("LogOut",style: TextStyle(color: Colors.white),),),),
+                                            height: 40,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 25,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: ColorConstant.primary1,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                "LogOut",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),

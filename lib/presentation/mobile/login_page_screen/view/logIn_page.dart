@@ -7,6 +7,7 @@ import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_
 import 'package:lumainar/presentation/mobile/login_page_screen/controller/login_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen.dart';
+import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen_website.dart';
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -29,15 +30,18 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
 
     if (mounted) {
-      Provider.of<LoginScreenController>(context, listen: false).setLoading(true);
+      Provider.of<LoginScreenController>(context, listen: false)
+          .setLoading(true);
 
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
         await AppUtils.getAccessKey().then((value) async {
           if (value != null && value.isNotEmpty) {
-            Provider.of<AppConfigController>(context, listen: false).haveAccessKey();
+            Provider.of<AppConfigController>(context, listen: false)
+                .haveAccessKey();
           }
         });
-        Provider.of<LoginScreenController>(context, listen: false).setLoading(false);
+        Provider.of<LoginScreenController>(context, listen: false)
+            .setLoading(false);
       });
     }
   }
@@ -72,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const Text(
                           'LogIn Now !',
-                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(height: 100),
                         TextfieldRefactor(
@@ -82,14 +87,21 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 30),
                         TextfieldRefactor(
-                          obscureText: loginProvider.isPasswordVisible == false ? true : false,
+                          obscureText: loginProvider.isPasswordVisible == false
+                              ? true
+                              : false,
                           // TODO :need to add form keys in text fielsds
                           controller: _passwordController,
                           labelText: "Password",
                           suffixIcon: IconButton(
-                            onPressed: Provider.of<LoginScreenController>(context, listen: false).eyButton,
+                            onPressed: Provider.of<LoginScreenController>(
+                                    context,
+                                    listen: false)
+                                .eyButton,
                             icon: Icon(
-                              loginProvider.isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                              loginProvider.isPasswordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                               color: ColorConstant.primary1,
                             ),
                           ),
@@ -117,28 +129,41 @@ class _LoginPageState extends State<LoginPage> {
                             ? Center(child: ReusableLoadingWidget())
                             : InkWell(
                                 onTap: () async {
-                                  if (_userNameController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
-                                    await Provider.of<LoginScreenController>(context, listen: false)
+                                  if (_userNameController.text.isNotEmpty &&
+                                      _passwordController.text.isNotEmpty) {
+                                    await Provider.of<LoginScreenController>(
+                                            context,
+                                            listen: false)
                                         .onLogin(
-                                            phoneNumber: _userNameController.text.trim(),
-                                            password: _passwordController.text.trim())
+                                            phoneNumber:
+                                                _userNameController.text.trim(),
+                                            password:
+                                                _passwordController.text.trim())
                                         .then((value) async {
                                       if (value) {
-                                        if (loginProvider.isMobileVerified == true) {
+                                        if (loginProvider.isMobileVerified ==
+                                            true) {
                                           Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) => ChangeNotifierProvider(
-                                                      create: (context) => BatchScreenController(),
-                                                      child: BatchBottomTab())),
+                                                  builder: (context) =>
+                                                      ChangeNotifierProvider(
+                                                          create: (context) =>
+                                                              BatchScreenController(),
+                                                          child:
+                                                              BatchBottomTab())),
                                               (route) => false);
                                         } else {
                                           Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => OtpVerificationScreen(
-                                                    isNavigationFromLogin: true,
-                                                    phoneNumber: loginProvider.userPhoneNumber ?? ""),
+                                                builder: (context) =>
+                                                    OtpWebVerificationScreen(
+                                                        isNavigationFromLogin:
+                                                            true,
+                                                        phoneNumber: loginProvider
+                                                                .userPhoneNumber ??
+                                                            ""),
                                               ),
                                               (route) => false);
                                         }
@@ -151,13 +176,16 @@ class _LoginPageState extends State<LoginPage> {
                                     });
                                   } else {
                                     AppUtils.oneTimeSnackBar(
-                                        bgColor: Colors.red, "Enter valid user name or password", context: context);
+                                        bgColor: Colors.red,
+                                        "Enter valid user name or password",
+                                        context: context);
                                   }
                                 },
                                 child: Center(
                                   child: Container(
                                     height: 55,
-                                    width: MediaQuery.of(context).size.width * .75,
+                                    width:
+                                        MediaQuery.of(context).size.width * .75,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       color: ColorConstant.primary1,
@@ -165,7 +193,10 @@ class _LoginPageState extends State<LoginPage> {
                                     child: const Center(
                                         child: Text(
                                       "LogIn",
-                                      style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w600),
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
                                     )),
                                   ),
                                 ),

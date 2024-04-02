@@ -7,6 +7,7 @@ import 'package:lumainar/presentation/mobile/batch_bottom_tab/controller/batch_b
 import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_tab.dart';
 import 'package:lumainar/presentation/mobile/login_page_screen/controller/login_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen.dart';
+import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen_website.dart';
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -167,7 +168,7 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                       //  color: Colors.green,
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                         child: Container(
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 230, 230, 230),
@@ -270,7 +271,7 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            OtpVerificationScreen(
+                                                            OtpWebVerificationScreen(
                                                                 isNavigationFromLogin:
                                                                     true,
                                                                 phoneNumber:

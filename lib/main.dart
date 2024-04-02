@@ -2,15 +2,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:lumainar/core/constants/colors.dart';
-import 'package:lumainar/firebase_options.dart';
 
 import 'package:lumainar/presentation/mobile/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
 import 'package:lumainar/presentation/mobile/login_page_screen/view/logIn_page.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/controller/otp_verification_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen.dart';
+import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen_website.dart';
 
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
-import 'package:lumainar/presentation/mobile/splash_screen/view/splashScreen.dart';
+
 import 'package:lumainar/presentation/mobile/video_folder_screen/controller/video_folder_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -34,10 +35,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => BatchClassVideoController()),
-        ChangeNotifierProvider(create: (context) => VideoPlayerScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => BatchClassVideoController()),
+        ChangeNotifierProvider(
+            create: (context) => VideoPlayerScreenController()),
         ChangeNotifierProvider(create: (context) => LoginScreenController()),
-        ChangeNotifierProvider(create: (context) => OtpVerificationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => OtpVerificationScreenController()),
         ChangeNotifierProvider(create: (context) => AppConfigController()),
         ChangeNotifierProvider(create: (context) => FolderVideoController()),
       ],
@@ -45,8 +49,9 @@ class MyApp extends StatelessWidget {
         navigatorKey: AppConfigController.navigatorState,
         debugShowCheckedModeBanner: false,
         title: 'Luminar Technolab',
-        theme:
-            ThemeData(scaffoldBackgroundColor: Colors.white, iconTheme: IconThemeData(color: ColorConstant.primary1)),
+        theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: ColorConstant.primary1)),
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
           defaultScale: true,
@@ -58,7 +63,12 @@ class MyApp extends StatelessWidget {
         ),
         home: LayoutBuilder(
           builder: (context, constraints) {
-            return constraints.maxWidth < 1000 ? LoginPage() : DesktopLoginPage();
+            return constraints.maxWidth < 1000
+                ? LoginPage()
+                : DesktopLoginPage();
+            // return constraints.maxWidth < 1000
+            //     ? OtpVerificationScreen()
+            //     : OtpWebVerificationScreen();
           },
         ),
       ),
