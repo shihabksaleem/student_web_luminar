@@ -41,27 +41,29 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          InkWell(
-            onTap: () {
-              HelperFunctions.logOut(context);
-            },
-            child: Container(
-              height: 40,
-              padding: EdgeInsets.symmetric(
-                horizontal: 25,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorConstant.primary1,
-              ),
-              child: Center(
-                child: Text(
-                  "LogOut",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          ),
+          batchscreenprovider.batchList.isEmpty
+              ? InkWell(
+                  onTap: () {
+                    HelperFunctions.logOut(context);
+                  },
+                  child: Container(
+                    height: 40,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 25,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: ColorConstant.primary1,
+                    ),
+                    child: Center(
+                      child: Text(
+                        "LogOut",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(),
           SizedBox(
             width: 60,
           )
@@ -105,7 +107,7 @@ class _BatchBottomTabState extends State<BatchBottomTab> {
                                     Row(
                                       children: [
                                         const Text(
-                                          "Recently Added",
+                                          "",
                                           style: TextStyle(fontSize: 16),
                                         ),
                                         SizedBox(width: 30),
