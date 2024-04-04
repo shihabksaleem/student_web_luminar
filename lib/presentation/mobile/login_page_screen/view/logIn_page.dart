@@ -106,24 +106,24 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.end,
-                        //   children: [
-                        //     TextButton(
-                        //         onPressed: () {
-                        //           _userNameController.clear();
-                        //           _passwordController.clear();
-                        //           Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                 builder: (context) => ChangeNotifierProvider(
-                        //                     create: (context) => EnterPhoneNumberScreenController(),
-                        //                     child: EnterPhoneNumber()),
-                        //               ));
-                        //         },
-                        //         child: const Text("Forgot password?"))
-                        //   ],
-                        // ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  _userNameController.clear();
+                                  _passwordController.clear();
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (context) => ChangeNotifierProvider(
+                                  //           create: (context) => EnterPhoneNumberScreenController(),
+                                  //           child: EnterPhoneNumber()),
+                                  //     ));
+                                },
+                                child: const Text("Forgot password?"))
+                          ],
+                        ),
                         const SizedBox(height: 40),
                         Provider.of<LoginScreenController>(context).isLoading
                             ? Center(child: ReusableLoadingWidget())
@@ -201,7 +201,6 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                               ),
-
                         const SizedBox(
                           height: 100,
                         ),
