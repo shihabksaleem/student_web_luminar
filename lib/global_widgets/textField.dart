@@ -15,6 +15,7 @@ class TextfieldRefactor extends StatelessWidget {
   final String? hintText;
   final bool obscureText;
   final List<TextInputFormatter>? inputFormatters;
+  final bool autofocus;
   // final IconData fieldIcon;
   const TextfieldRefactor({
     super.key,
@@ -29,6 +30,7 @@ class TextfieldRefactor extends StatelessWidget {
     this.hintText,
     this.obscureText = false,
     this.inputFormatters,
+    this.autofocus = false,
     // required this.fieldIcon
   });
 
@@ -37,6 +39,7 @@ class TextfieldRefactor extends StatelessWidget {
     return Form(
       key: formKey,
       child: TextFormField(
+        autofocus: autofocus,
         obscureText: obscureText,
         maxLines: maxLines,
         controller: controller,

@@ -8,7 +8,8 @@ import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_
 import 'package:lumainar/presentation/mobile/login_page_screen/controller/login_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen_website.dart';
-import 'package:lumainar/presentation/mobile/reset_password_screen/reset_password_desktop.dart';
+import 'package:lumainar/presentation/mobile/enter_phone_number_screen/controller/enter_phone_number_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/enter_phone_number_screen/view/enter_phone_number_screen.dart';
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -31,18 +32,15 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
     super.initState();
 
     if (mounted) {
-      Provider.of<LoginScreenController>(context, listen: false)
-          .setLoading(true);
+      Provider.of<LoginScreenController>(context, listen: false).setLoading(true);
 
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
         await AppUtils.getAccessKey().then((value) async {
           if (value != null && value.isNotEmpty) {
-            Provider.of<AppConfigController>(context, listen: false)
-                .haveAccessKey();
+            Provider.of<AppConfigController>(context, listen: false).haveAccessKey();
           }
         });
-        Provider.of<LoginScreenController>(context, listen: false)
-            .setLoading(false);
+        Provider.of<LoginScreenController>(context, listen: false).setLoading(false);
       });
     }
   }
@@ -72,8 +70,7 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                     child: Container(
                       //  color: Colors.green,
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                         child: Container(
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 230, 230, 230),
@@ -82,8 +79,7 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                               bottomLeft: Radius.circular(20),
                             ),
                           ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                           child: Center(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -91,10 +87,7 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                    height: 150,
-                                    width: 150,
-                                    child: Image.asset(
-                                        "assets/images/dp/luminar logo.png")),
+                                    height: 150, width: 150, child: Image.asset("assets/images/dp/luminar logo.png")),
                                 SizedBox(
                                   height: 30,
                                 ),
@@ -112,23 +105,14 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                                 ),
                                 const SizedBox(height: 30),
                                 TextfieldRefactor(
-                                  obscureText:
-                                      loginProvider.isPasswordVisible == false
-                                          ? true
-                                          : false,
+                                  obscureText: loginProvider.isPasswordVisible == false ? true : false,
                                   // TODO :need to add form keys in text fielsds
                                   controller: _passwordController,
                                   labelText: "Password",
                                   suffixIcon: IconButton(
-                                    onPressed:
-                                        Provider.of<LoginScreenController>(
-                                                context,
-                                                listen: false)
-                                            .eyButton,
+                                    onPressed: Provider.of<LoginScreenController>(context, listen: false).eyButton,
                                     icon: Icon(
-                                      loginProvider.isPasswordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
+                                      loginProvider.isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                                       color: ColorConstant.primary1,
                                     ),
                                   ),
@@ -146,8 +130,11 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ResetPasswordDesktop()));
+                                                builder: (context) => ChangeNotifierProvider(
+                                                  create: (context) => EnterPhoneNumberScreenController(),
+                                                  child: EnterPhoneNumberScreen(),
+                                                ),
+                                              ));
                                         },
                                         child: const Text("Forgot password?"))
                                   ],
@@ -155,53 +142,33 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Provider.of<LoginScreenController>(context)
-                                        .isLoading
+                                Provider.of<LoginScreenController>(context).isLoading
                                     ? Center(child: ReusableLoadingWidget())
                                     : InkWell(
                                         onTap: () async {
-                                          if (_userNameController
-                                                  .text.isNotEmpty &&
-                                              _passwordController
-                                                  .text.isNotEmpty) {
-                                            await Provider.of<
-                                                        LoginScreenController>(
-                                                    context,
-                                                    listen: false)
+                                          if (_userNameController.text.isNotEmpty &&
+                                              _passwordController.text.isNotEmpty) {
+                                            await Provider.of<LoginScreenController>(context, listen: false)
                                                 .onLogin(
-                                                    phoneNumber:
-                                                        _userNameController.text
-                                                            .trim(),
-                                                    password:
-                                                        _passwordController.text
-                                                            .trim())
+                                                    phoneNumber: _userNameController.text.trim(),
+                                                    password: _passwordController.text.trim())
                                                 .then((value) async {
                                               if (value) {
-                                                if (loginProvider
-                                                        .isMobileVerified ==
-                                                    true) {
+                                                if (loginProvider.isMobileVerified == true) {
                                                   Navigator.pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ChangeNotifierProvider(
-                                                                  create: (context) =>
-                                                                      BatchScreenController(),
-                                                                  child:
-                                                                      BatchBottomTab())),
+                                                          builder: (context) => ChangeNotifierProvider(
+                                                              create: (context) => BatchScreenController(),
+                                                              child: BatchBottomTab())),
                                                       (route) => false);
                                                 } else {
                                                   Navigator.pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            OtpWebVerificationScreen(
-                                                                isNavigationFromLogin:
-                                                                    true,
-                                                                phoneNumber:
-                                                                    loginProvider
-                                                                            .userPhoneNumber ??
-                                                                        ""),
+                                                        builder: (context) => OtpWebVerificationScreen(
+                                                            isNavigationFromLogin: true,
+                                                            phoneNumber: loginProvider.userPhoneNumber ?? ""),
                                                       ),
                                                       (route) => false);
                                                 }
@@ -221,22 +188,16 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                                         },
                                         child: Container(
                                           height: 55,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .75,
+                                          width: MediaQuery.of(context).size.width * .75,
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                                            borderRadius: BorderRadius.circular(20),
                                             color: ColorConstant.primary1,
                                           ),
                                           child: const Center(
                                               child: Text(
                                             "LogIn",
                                             style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600),
+                                                fontSize: 20, color: Colors.white, fontWeight: FontWeight.w600),
                                           )),
                                         ),
                                       ),

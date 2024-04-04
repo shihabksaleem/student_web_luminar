@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:lumainar/core/constants/colors.dart';
 
 import 'package:lumainar/presentation/mobile/batch_class_videos_screen/controller/batch_class_video_screen_controller.dart';
-import 'package:lumainar/presentation/mobile/change_pass_screen/change_password.dart';
+import 'package:lumainar/presentation/mobile/change_pass_screen/change_password_screen.dart';
+import 'package:lumainar/presentation/mobile/change_pass_screen/controller/change_password_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/login_page_screen/view/desktop_logIn_page.dart';
 import 'package:lumainar/presentation/mobile/login_page_screen/view/logIn_page.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/controller/otp_verification_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen_website.dart';
-import 'package:lumainar/presentation/mobile/reset_password_screen/reset_password_desktop.dart';
+import 'package:lumainar/presentation/mobile/enter_phone_number_screen/controller/enter_phone_number_screen_controller.dart';
+import 'package:lumainar/presentation/mobile/enter_phone_number_screen/view/enter_phone_number_screen.dart';
 
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 
@@ -37,23 +39,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (context) => BatchClassVideoController()),
-        ChangeNotifierProvider(
-            create: (context) => VideoPlayerScreenController()),
+        ChangeNotifierProvider(create: (context) => BatchClassVideoController()),
+        ChangeNotifierProvider(create: (context) => VideoPlayerScreenController()),
         ChangeNotifierProvider(create: (context) => LoginScreenController()),
-        ChangeNotifierProvider(
-            create: (context) => OtpVerificationScreenController()),
+        ChangeNotifierProvider(create: (context) => OtpVerificationScreenController()),
         ChangeNotifierProvider(create: (context) => AppConfigController()),
         ChangeNotifierProvider(create: (context) => FolderVideoController()),
+        ChangeNotifierProvider(create: (context) => ChangePasswordScreenController()),
       ],
       child: MaterialApp(
         navigatorKey: AppConfigController.navigatorState,
         debugShowCheckedModeBanner: false,
         title: 'Luminar Technolab',
-        theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: ColorConstant.primary1)),
+        theme:
+            ThemeData(scaffoldBackgroundColor: Colors.white, iconTheme: IconThemeData(color: ColorConstant.primary1)),
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
           defaultScale: true,
@@ -65,9 +64,7 @@ class MyApp extends StatelessWidget {
         ),
         home: LayoutBuilder(
           builder: (context, constraints) {
-            return constraints.maxWidth < 1000
-                ? LoginPage()
-                : DesktopLoginPage();
+            return constraints.maxWidth < 1000 ? LoginPage() : DesktopLoginPage();
             // return constraints.maxWidth < 1000
             //     ? ChangePasswordScreen()
             //     : ChangePasswordScreen();
