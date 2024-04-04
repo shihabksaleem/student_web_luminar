@@ -8,6 +8,7 @@ import 'package:lumainar/presentation/mobile/batch_bottom_tab/view/batch_bottom_
 import 'package:lumainar/presentation/mobile/login_page_screen/controller/login_screen_controller.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen.dart';
 import 'package:lumainar/presentation/mobile/otp_verification_screen/view/otp_verification_screen_website.dart';
+import 'package:lumainar/presentation/mobile/reset_password_screen/reset_password_desktop.dart';
 import 'package:lumainar/presentation/mobile/splash_screen/controller/app_config_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -65,102 +66,6 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  // child: Container(
-
-// color: Colors.amber,              child: Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 25),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-
-//                     Provider.of<LoginScreenController>(context).isLoading
-//                         ? Center(child: ReusableLoadingWidget())
-//                         : InkWell(
-//                             onTap: () async {
-//                               if (_userNameController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
-//                                 await Provider.of<LoginScreenController>(context, listen: false)
-//                                     .onLogin(
-//                                         phoneNumber: _userNameController.text.trim(),
-//                                         password: _passwordController.text.trim())
-//                                     .then((value) async {
-//                                   if (value) {
-//                                     if (loginProvider.isMobileVerified == true) {
-//                                       Navigator.pushAndRemoveUntil(
-//                                           context,
-//                                           MaterialPageRoute(
-//                                               builder: (context) => ChangeNotifierProvider(
-//                                                   create: (context) => BatchScreenController(), child: BatchBottomTab())),
-//                                           (route) => false);
-//                                     } else {
-//                                       Navigator.pushAndRemoveUntil(
-//                                           context,
-//                                           MaterialPageRoute(
-//                                             builder: (context) => OtpVerificationScreen(
-//                                                 isNavigationFromLogin: true,
-//                                                 phoneNumber: loginProvider.userPhoneNumber ?? ""),
-//                                           ),
-//                                           (route) => false);
-//                                     }
-//                                     _userNameController.clear();
-//                                     _passwordController.clear();
-//                                   }
-//                                   // else {
-//                                   //   AppUtils.oneTimeSnackBar("Login failed Try Again", context: context);
-//                                   // }
-//                                 });
-//                               } else {
-//                                 AppUtils.oneTimeSnackBar(
-//                                     bgColor: Colors.red, "Enter valid user name or password", context: context);
-//                               }
-//                             },
-//                             child: Center(
-//                               child: Container(
-//                                 height: 55,
-//                                 width: MediaQuery.of(context).size.width * .75,
-//                                 decoration: BoxDecoration(
-//                                   borderRadius: BorderRadius.circular(20),
-//                                   color: ColorConstant.primary1,
-//                                 ),
-//                                 child: const Center(
-//                                     child: Text(
-//                                   "LogIn",
-//                                   style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w600),
-//                                 )),
-//                               ),
-//                             ),
-//                           ),
-//                     const SizedBox(height: 20),
-//                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-//                       Row(
-//                         children: [
-//                           Text(
-//                             "Don't have an account ?  ",
-//                             style: TextStyle(
-//                               color: Colors.black, // Black color for "Agree"
-//                               fontSize: 16.0,
-//                             ),
-//                           ),
-
-//                         ],
-//                       ),
-//                     ]),
-//                     const SizedBox(height: 40),
-//                     const Center(
-//                         child: Text(
-//                       "OR",
-//                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-//                     )),
-//                     const SizedBox(
-//                       height: 20,
-//                     ),
-
-//                     const SizedBox(
-//                       height: 60,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
                 ),
                 Expanded(
                     flex: 2,
@@ -229,7 +134,26 @@ class _DesktopLoginPageState extends State<DesktopLoginPage> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () {
+                                          _userNameController.clear();
+                                          _passwordController.clear();
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ResetPasswordDesktop()));
+                                        },
+                                        child: const Text("Forgot password?"))
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 Provider.of<LoginScreenController>(context)
                                         .isLoading
