@@ -17,7 +17,8 @@ class ChangePasswordScreen extends StatefulWidget {
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final TextEditingController newPasswordController = TextEditingController();
-  final TextEditingController confrimNewPasswordController = TextEditingController();
+  final TextEditingController confrimNewPasswordController =
+      TextEditingController();
 
   final newPassKey = GlobalKey<FormState>();
   final confirmPassKey = GlobalKey<FormState>();
@@ -29,7 +30,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         centerTitle: true,
         title: Text(
           "Update your password",
-          style: TextStyle(color: ColorConstant.primary1, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: ColorConstant.primary1, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -53,30 +55,87 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         ),
                         Text(
                           "Change Your Password",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 20),
-                        PasswordField(name: "New Password"),
-                        SizedBox(height: 20),
-                        PasswordField(name: "Confirm Password"),
+                        CustomInputFieldWithTitle(
+                          obscureText: true,
+                          controller: newPasswordController,
+                          formKey: newPassKey,
+                          title: "New Password",
+                          hintText: "Enter",
+                          IsEditable: true,
+                          validator: (value) {
+                            if (value != null && value.length >= 6) {
+                              return null;
+                            } else {
+                              return "password must contain 6 characters";
+                            }
+                          },
+                        ),
+                        CustomInputFieldWithTitle(
+                          obscureText: true,
+                          controller: confrimNewPasswordController,
+                          formKey: confirmPassKey,
+                          title: "Confirm New password",
+                          hintText: "Enter",
+                          IsEditable: true,
+                          validator: (value) {
+                            if (confrimNewPasswordController.text
+                                    .trim()
+                                    .length <
+                                4) {
+                              return "Enter a valid password";
+                            } else if (confrimNewPasswordController.text
+                                    .trim() ==
+                                newPasswordController.text.trim()) {
+                              return null;
+                            } else {
+                              return "Passwords doesnt match";
+                            }
+                          },
+                        ),
                         SizedBox(height: 20),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
                           child: GestureDetector(
-                            onTap: () {
-                              // Navigator.of(context).pushReplacement(
-                              //     MaterialPageRoute(builder: (context) => ProfileScreen()));
-                              Navigator.pop(context);
+                            onTap: () async {
+                              if (newPassKey.currentState!.validate() &&
+                                  confirmPassKey.currentState!.validate()) {
+                                await Provider.of<
+                                            ChangePasswordScreenController>(
+                                        context,
+                                        listen: false)
+                                    .updatePassword(
+                                        newPassword:
+                                            newPasswordController.text.trim(),
+                                        userId: widget.userId)
+                                    .then((value) {
+                                  if (value) {
+                                    Navigator.pop(context);
+                                    AppUtils.oneTimeSnackBar(
+                                        "Your Password Updated Successfully",
+                                        context: context);
+                                  }
+                                });
+                              }
+                              ;
                             },
                             child: Container(
                               height: 50,
                               width: double.infinity,
-                              decoration:
-                                  BoxDecoration(borderRadius: BorderRadius.circular(15), color: ColorConstant.primary1),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: ColorConstant.primary1),
                               child: Center(
                                 child: Text(
                                   "Submit",
-                                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -110,7 +169,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             children: [
                               Text(
                                 "Change Your Password",
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 20),
                               CustomInputFieldWithTitle(
@@ -136,9 +196,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 hintText: "Enter",
                                 IsEditable: true,
                                 validator: (value) {
-                                  if (confrimNewPasswordController.text.trim().length < 4) {
+                                  if (confrimNewPasswordController.text
+                                          .trim()
+                                          .length <
+                                      4) {
                                     return "Enter a valid password";
-                                  } else if (confrimNewPasswordController.text.trim() ==
+                                  } else if (confrimNewPasswordController.text
+                                          .trim() ==
                                       newPasswordController.text.trim()) {
                                     return null;
                                   } else {
@@ -148,18 +212,27 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               ),
                               SizedBox(height: 20),
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 15),
                                 child: GestureDetector(
                                   onTap: () async {
                                     if (newPassKey.currentState!.validate() &&
-                                        confirmPassKey.currentState!.validate()) {
-                                      await Provider.of<ChangePasswordScreenController>(context, listen: false)
+                                        confirmPassKey.currentState!
+                                            .validate()) {
+                                      await Provider.of<
+                                                  ChangePasswordScreenController>(
+                                              context,
+                                              listen: false)
                                           .updatePassword(
-                                              newPassword: newPasswordController.text.trim(), userId: widget.userId)
+                                              newPassword: newPasswordController
+                                                  .text
+                                                  .trim(),
+                                              userId: widget.userId)
                                           .then((value) {
                                         if (value) {
                                           Navigator.pop(context);
-                                          AppUtils.oneTimeSnackBar("Your Password Updated Successfully",
+                                          AppUtils.oneTimeSnackBar(
+                                              "Your Password Updated Successfully",
                                               context: context);
                                         }
                                       });
@@ -169,12 +242,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     height: 50,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15), color: ColorConstant.primary1),
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: ColorConstant.primary1),
                                     child: Center(
                                       child: Text(
                                         "Submit",
-                                        style:
-                                            TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
@@ -210,15 +286,18 @@ class _PasswordFieldState extends State<PasswordField> {
       obscureText: _isObscure,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10),
-          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorConstant.primary1)),
-          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorConstant.primary1)),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstant.primary1)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorConstant.primary1)),
           labelText: widget.name,
           labelStyle: TextStyle(color: ColorConstant.primary1),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: ColorConstant.primary1),
           ),
           suffixIcon: IconButton(
-              icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off, color: ColorConstant.primary1),
+              icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off,
+                  color: ColorConstant.primary1),
               onPressed: () {
                 setState(() {
                   _isObscure = !_isObscure;
